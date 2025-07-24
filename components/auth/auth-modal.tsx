@@ -61,6 +61,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setLoading(true)
 
     try {
+      console.log("Starting signup process...")
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -76,31 +78,60 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
       })
 
       if (error) {
-        toast.error(error.message)
-      } else {
-        // Update profile with additional data
-        if (data.user) {
-          const { error: profileError } = await supabase.from("profiles").upsert({
-            id: data.user.id,
-            email,
-            full_name: fullName,
-            phone,
-            role,
-            business_name: role === "fbo" ? businessName : null,
-            business_address: role === "fbo" ? businessAddress : null,
-          })
+        console.error("Auth signup error:", error)
+        toast.error(`Signup failed: ${error.message}`)
+        return
+      }
 
-          if (profileError) {
-            console.error("Profile creation error:", profileError)
-            toast.error("Account created but profile setup failed. Please contact support.")
+      console.log("Auth signup successful, user:", data.user?.id)
+
+      if (data.user) {
+        // Wait for the auth session to be established
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+
+        console.log("Creating profile for user:", data.user.id)
+
+        // Insert profile data directly
+        const { error: profileError } = await supabase.from("profiles").insert({
+          id: data.user.id,
+          email: data.user.email || email,
+          full_name: fullName,
+          phone: phone || null,
+          role: role,
+          business_name: role === "fbo" ? businessName : null,
+          business_address: role === "fbo" ? businessAddress : null,
+        })
+
+        if (profileError) {
+          console.error("Profile creation error:", profileError)
+
+          // Try to delete the auth user if profile creation fails
+          try {
+            await supabase.auth.admin.deleteUser(data.user.id)
+          } catch (deleteError) {
+            console.error("Failed to cleanup user after profile error:", deleteError)
           }
+
+          toast.error(`Registration failed: ${profileError.message}`)
+          return
         }
 
+        console.log("Profile created successfully")
         toast.success("Account created successfully! Please check your email to verify your account.")
         onClose()
+
+        // Clear form
+        setEmail("")
+        setPassword("")
+        setFullName("")
+        setPhone("")
+        setRole("consumer")
+        setBusinessName("")
+        setBusinessAddress("")
       }
     } catch (error) {
-      toast.error("An error occurred during sign up")
+      console.error("Unexpected error during signup:", error)
+      toast.error("An unexpected error occurred during sign up. Please try again.")
     } finally {
       setLoading(false)
     }
@@ -168,6 +199,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  minLength={6}
                 />
               </div>
               <div>
@@ -176,7 +208,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
               <div>
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Optional" />
               </div>
               <div>
                 <Label htmlFor="role">Account Type</Label>
