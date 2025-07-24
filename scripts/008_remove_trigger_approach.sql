@@ -1,9 +1,15 @@
 -- Remove the trigger-based approach since it's causing RLS issues
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-DROP FUNCTION IF EXISTS handle_new_user();
+DROP FUNCTION IF EXISTS public.handle_new_user();
 
--- We'll handle profile creation manually in the application code
--- This is more reliable and gives us better error handling
+-- Clean up any existing policies that might conflict
+DROP POLICY IF EXISTS "Service role can insert profiles" ON profiles;
+DROP POLICY IF EXISTS "Enable insert for authenticated users only" ON profiles;
+DROP POLICY IF EXISTS "Enable read access for all users" ON profiles;
+DROP POLICY IF EXISTS "Enable update for users based on email" ON profiles;
+
+-- The application will handle profile creation manually
+-- This gives us better control and error handling
 
 -- Ensure the profiles table has the correct structure
 ALTER TABLE profiles ALTER COLUMN created_at SET DEFAULT now();
