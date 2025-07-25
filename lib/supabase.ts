@@ -3,7 +3,10 @@ import { cookies } from "next/headers"
 
 export const createClient = () => createClientComponentClient()
 
-export const createServerClient = () => createServerComponentClient({ cookies })
+export const createServerClient = () => {
+  const cookieStore = cookies()
+  return createServerComponentClient({ cookies: () => cookieStore })
+}
 
 export type Database = {
   public: {
@@ -106,6 +109,8 @@ export type Database = {
           status: "pending" | "confirmed" | "ready" | "completed" | "cancelled"
           pickup_time: string | null
           notes: string | null
+          delivery_address: string
+          phone_number: string
           created_at: string
           updated_at: string
         }
@@ -116,11 +121,15 @@ export type Database = {
           status?: "pending" | "confirmed" | "ready" | "completed" | "cancelled"
           pickup_time?: string | null
           notes?: string | null
+          delivery_address: string
+          phone_number: string
         }
         Update: {
           status?: "pending" | "confirmed" | "ready" | "completed" | "cancelled"
           pickup_time?: string | null
           notes?: string | null
+          delivery_address?: string
+          phone_number?: string
         }
       }
       order_items: {

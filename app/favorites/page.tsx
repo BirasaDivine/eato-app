@@ -1,6 +1,6 @@
 import { createServerClient } from "@/lib/supabase"
 import { Header } from "@/components/layout/header"
-import { CartItems } from "@/components/cart/cart-items"
+import { FavoriteItems } from "@/components/favorites/favorite-items"
 import { redirect } from "next/navigation"
 
 async function getUser() {
@@ -11,36 +11,36 @@ async function getUser() {
   return user
 }
 
-async function getCartItems(userId: string) {
+async function getFavoriteItems(userId: string) {
   const supabase = createServerClient()
 
-  const { data: cartItems } = await supabase
-    .from("cart_items")
+  const { data: favoriteItems } = await supabase
+    .from("favorites")
     .select(`
       *,
-      products!cart_items_product_id_fkey(
+      products!favorites_product_id_fkey(
         *,
         profiles!products_seller_id_fkey(business_name, full_name)
       )
     `)
     .eq("user_id", userId)
 
-  return cartItems || []
+  return favoriteItems || []
 }
 
-export default async function CartPage() {
+export default async function FavoritesPage() {
   const user = await getUser()
 
   if (!user) {
     redirect("/")
   }
 
-  const cartItems = await getCartItems(user.id)
+  const favoriteItems = await getFavoriteItems(user.id)
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      <CartItems initialCartItems={cartItems} />
+      <FavoriteItems initialFavoriteItems={favoriteItems} />
     </div>
   )
 }
