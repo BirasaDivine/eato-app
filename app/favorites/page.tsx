@@ -17,10 +17,22 @@ async function getFavoriteItems(userId: string) {
   const { data: favoriteItems } = await supabase
     .from("favorites")
     .select(`
-      *,
-      products!favorites_product_id_fkey(
-        *,
-        profiles!products_seller_id_fkey(business_name, full_name)
+      id,
+      product_id,
+      products:product_id(
+        id,
+        name,
+        description,
+        category,
+        original_price,
+        discounted_price,
+        quantity,
+        expiry_date,
+        image_urls,
+        profiles:seller_id(
+          business_name,
+          full_name
+        )
       )
     `)
     .eq("user_id", userId)

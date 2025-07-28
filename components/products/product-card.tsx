@@ -80,7 +80,8 @@ export function ProductCard({ product }: ProductCardProps) {
         const { error } = await supabase.from("favorites").delete().eq("user_id", user.id).eq("product_id", product.id)
 
         if (error) {
-          toast.error("Failed to remove from favorites")
+          console.error("Error removing from favorites:", error)
+          toast.error(`Failed to remove from favorites: ${error.message}`)
           return
         }
 
@@ -94,16 +95,17 @@ export function ProductCard({ product }: ProductCardProps) {
         })
 
         if (error) {
-          toast.error("Failed to add to favorites")
+          console.error("Error adding to favorites:", error)
+          toast.error(`Failed to add to favorites: ${error.message}`)
           return
         }
 
         setIsFavorite(true)
         toast.success("Added to favorites")
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error toggling favorite:", error)
-      toast.error("An error occurred")
+      toast.error(`An error occurred: ${error.message || "Unknown error"}`)
     } finally {
       setIsLoading(false)
     }
@@ -122,6 +124,8 @@ export function ProductCard({ product }: ProductCardProps) {
   }
 
   const formatExpiryDate = (dateString: string) => {
+    if (!dateString) return ""
+
     const date = new Date(dateString)
     const today = new Date()
     const diffTime = date.getTime() - today.getTime()

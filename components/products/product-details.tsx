@@ -9,7 +9,8 @@ import { Heart, ShoppingCart, Minus, Plus, MapPin, Clock, Star, Phone } from "lu
 import Image from "next/image"
 import Link from "next/link"
 import { ProductCard } from "./product-card"
-import { toast } from "react-toastify"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 interface Product {
   id: string
@@ -40,6 +41,7 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
   const [selectedImage, setSelectedImage] = useState(0)
 
   const supabase = createClient()
+  const router = useRouter()
 
   useEffect(() => {
     checkIfFavorite()
@@ -82,7 +84,8 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
         const { error } = await supabase.from("favorites").delete().eq("user_id", user.id).eq("product_id", product.id)
 
         if (error) {
-          toast.error("Failed to remove from favorites")
+          console.error("Error removing from favorites:", error)
+          toast.error(`Failed to remove from favorites: ${error.message}`)
           return
         }
 
@@ -96,16 +99,19 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
         })
 
         if (error) {
-          toast.error("Failed to add to favorites")
+          console.error("Error adding to favorites:", error)
+          toast.error(`Failed to add to favorites: ${error.message}`)
           return
         }
 
         setIsFavorite(true)
         toast.success("Added to favorites")
       }
-    } catch (error) {
+
+      router.refresh()
+    } catch (error: any) {
       console.error("Error toggling favorite:", error)
-      toast.error("An error occurred")
+      toast.error(`An error occurred: ${error.message || "Unknown error"}`)
     } finally {
       setIsLoading(false)
     }
@@ -142,7 +148,8 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
         const { error } = await supabase.from("cart_items").update({ quantity: newQuantity }).eq("id", existingItem.id)
 
         if (error) {
-          toast.error("Failed to update cart")
+          console.error("Error updating cart:", error)
+          toast.error(`Failed to update cart: ${error.message}`)
           return
         }
       } else {
@@ -159,16 +166,18 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
         })
 
         if (error) {
-          toast.error("Failed to add to cart")
+          console.error("Error adding to cart:", error)
+          toast.error(`Failed to add to cart: ${error.message}`)
           return
         }
       }
 
       toast.success("Added to cart")
       setQuantity(1)
-    } catch (error) {
+      router.refresh()
+    } catch (error: any) {
       console.error("Error adding to cart:", error)
-      toast.error("An error occurred")
+      toast.error(`An error occurred: ${error.message || "Unknown error"}`)
     } finally {
       setIsLoading(false)
     }
