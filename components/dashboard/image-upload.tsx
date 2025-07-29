@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { createClient } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase.client"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import { Upload, Loader2, X } from "lucide-react"

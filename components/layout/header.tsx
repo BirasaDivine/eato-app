@@ -178,12 +178,12 @@ export function Header() {
                 Home
               </Link>
               <Link
-                href="/about"
+                href="/fbo"
                 className={`text-sm font-medium transition-colors hover:text-green-600 ${
-                  pathname === "/about" ? "text-green-600" : "text-gray-600"
+                  pathname === "/fbo" ? "text-green-600" : "text-gray-600"
                 }`}
               >
-                About
+                For Business Owners
               </Link>
               <Link
                 href="/products"
