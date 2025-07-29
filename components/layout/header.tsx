@@ -157,13 +157,12 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white shadow-sm">
+      <header className="sticky top-0 z-[100] w-full bg-white shadow-sm">
         {/* First line: Logo and main navigation */}
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/placeholder-logo.svg" alt="ZeroWaste Rwanda" width={40} height={40} />
               <span className="text-xl font-bold text-green-600">ZeroWaste</span>
             </Link>
 
