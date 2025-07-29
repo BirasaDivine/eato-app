@@ -181,7 +181,7 @@ export function AuthModal({ isOpen, onClose, defaultTab = "signin", defaultRole 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[80vh] overflow-auto">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold">Welcome to ZeroWaste Rwanda</DialogTitle>
         </DialogHeader>
