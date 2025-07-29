@@ -12,7 +12,6 @@ const navigation = [
   { name: "Products", href: "/dashboard/products", icon: Package },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingCart },
   { name: "Profile", href: "/dashboard/profile", icon: User },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ]
 
 export function DashboardSidebar() {
