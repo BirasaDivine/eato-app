@@ -4,7 +4,7 @@ import { OrdersTable } from "@/components/dashboard/orders-table"
 import { redirect } from "next/navigation"
 
 async function getUser() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -12,13 +12,13 @@ async function getUser() {
 }
 
 async function getUserProfile(userId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", userId).single()
   return profile
 }
 
 async function getOrders(sellerId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const { data: orders } = await supabase
     .from("orders")
     .select(`

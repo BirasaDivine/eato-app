@@ -7,7 +7,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 
 async function getProfile() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const {
     data: { user },
@@ -26,7 +26,7 @@ async function getProfile() {
 }
 
 async function getOrderStats(userId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const { data: orders } = await supabase.from("orders").select("id, total_amount, status").eq("buyer_id", userId)
 
@@ -39,7 +39,7 @@ async function getOrderStats(userId: string) {
 }
 
 async function getRecentOrders(userId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const { data: orders } = await supabase
     .from("orders")

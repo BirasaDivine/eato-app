@@ -5,7 +5,7 @@ import { Package, ShoppingCart, TrendingUp, Users } from "lucide-react"
 import { redirect } from "next/navigation"
 
 async function getUser() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -13,13 +13,13 @@ async function getUser() {
 }
 
 async function getUserProfile(userId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", userId).single()
   return profile
 }
 
 async function getDashboardStats(sellerId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   // Get products count
   const { count: productsCount } = await supabase

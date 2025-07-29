@@ -10,7 +10,7 @@ interface SearchParams {
 }
 
 async function getProducts(searchParams: SearchParams) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   let query = supabase
     .from("products")
@@ -50,7 +50,7 @@ async function getProducts(searchParams: SearchParams) {
 }
 
 async function getCategories() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const { data } = await supabase
     .from("products")

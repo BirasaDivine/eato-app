@@ -9,7 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { ProductCard } from "@/components/products/product-card"
 import { Header } from "@/components/layout/header"
 import { AuthModal } from "@/components/auth/auth-modal"
-import { createClient } from "@/lib/supabase"
+import { createServerClient } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase.client"
 import {
   ShoppingCart,
   Store,
@@ -40,6 +41,22 @@ interface Product {
     business_name: string | null
     full_name: string
   }
+}
+
+async function getFeaturedProducts() {
+  const supabase = await createServerClient()
+
+  const { data: products } = await supabase
+    .from("products")
+    .select(`
+      *,
+      profiles!products_seller_id_fkey(business_name, full_name)
+    `)
+    .eq("is_active", true)
+    .order("created_at", { ascending: false })
+    .limit(8)
+
+  return products || []
 }
 
 export default function HomePage() {

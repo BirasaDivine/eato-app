@@ -4,7 +4,7 @@ import { ProductDetails } from "@/components/products/product-details"
 import { notFound } from "next/navigation"
 
 async function getProduct(id: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const { data: product } = await supabase
     .from("products")
@@ -20,7 +20,7 @@ async function getProduct(id: string) {
 }
 
 async function getRelatedProducts(categoryId: string, currentProductId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
 
   const { data: products } = await supabase
     .from("products")

@@ -4,7 +4,7 @@ import { ProductForm } from "@/components/dashboard/product-form"
 import { redirect, notFound } from "next/navigation"
 
 async function getUser() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -12,13 +12,13 @@ async function getUser() {
 }
 
 async function getUserProfile(userId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const { data: profile } = await supabase.from("profiles").select("*").eq("id", userId).single()
   return profile
 }
 
 async function getProduct(productId: string, sellerId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   const { data: product } = await supabase
     .from("products")
     .select("*")
