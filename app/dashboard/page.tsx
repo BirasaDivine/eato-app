@@ -3,6 +3,7 @@ import { DashboardLayout } from "@/components/dashboard/layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Package, ShoppingCart, TrendingUp, Users } from "lucide-react"
 import { redirect } from "next/navigation"
+import Link from "next/link"
 
 async function getUser() {
   const supabase = await createServerClient()
@@ -143,35 +144,41 @@ export default async function DashboardPage() {
             <CardDescription>Common tasks to manage your business</CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-              <div className="flex items-center space-x-3">
-                <Package className="h-8 w-8 text-green-600" />
-                <div>
-                  <h3 className="font-medium">Add New Product</h3>
-                  <p className="text-sm text-gray-600">List a new product for sale</p>
+            <Link href="/dashboard/products">
+              <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <Package className="h-8 w-8 text-green-600" />
+                  <div>
+                    <h3 className="font-medium">Add New Product</h3>
+                    <p className="text-sm text-gray-600">List a new product for sale</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
 
-            <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-              <div className="flex items-center space-x-3">
-                <ShoppingCart className="h-8 w-8 text-blue-600" />
-                <div>
-                  <h3 className="font-medium">View Orders</h3>
-                  <p className="text-sm text-gray-600">Check pending orders</p>
+            <Link href="/dashboard/orders">
+              <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <ShoppingCart className="h-8 w-8 text-blue-600" />
+                  <div>
+                    <h3 className="font-medium">View Orders</h3>
+                    <p className="text-sm text-gray-600">Check pending orders</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
 
-            <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-              <div className="flex items-center space-x-3">
-                <Users className="h-8 w-8 text-purple-600" />
-                <div>
-                  <h3 className="font-medium">Update Profile</h3>
-                  <p className="text-sm text-gray-600">Edit business information</p>
+            <Link href="/dashboard/profile">
+              <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <Users className="h-8 w-8 text-purple-600" />
+                  <div>
+                    <h3 className="font-medium">Update Profile</h3>
+                    <p className="text-sm text-gray-600">Edit business information</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           </CardContent>
         </Card>
       </div>
