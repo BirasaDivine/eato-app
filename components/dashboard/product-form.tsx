@@ -292,7 +292,7 @@ export function ProductForm({ sellerId, product }: ProductFormProps) {
             {/* Pricing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="original_price">Original Price (RWF) *</Label>
+                <Label htmlFor="original_price">Original Price (FRW) *</Label>
                 <Input
                   id="original_price"
                   type="number"
@@ -306,7 +306,7 @@ export function ProductForm({ sellerId, product }: ProductFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="discounted_price">Discounted Price (RWF) *</Label>
+                <Label htmlFor="discounted_price">Discounted Price (FRW) *</Label>
                 <Input
                   id="discounted_price"
                   type="number"

@@ -186,7 +186,7 @@ export function ProductDetails({ product, relatedProducts }: ProductDetailsProps
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-RW", {
       style: "currency",
-      currency: "RWF",
+      currency: "FRW",
       minimumFractionDigits: 0,
     }).format(price)
   }

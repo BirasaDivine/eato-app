@@ -201,7 +201,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xl font-bold text-green-600">RWF {product.price.toLocaleString()}</span>
+                <span className="text-xl font-bold text-green-600">FRW {product.price.toLocaleString()}</span>
                 <p className="text-xs text-gray-500">
                   by {product.profiles.business_name || product.profiles.full_name}
                 </p>
