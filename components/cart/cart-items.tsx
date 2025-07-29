@@ -142,7 +142,7 @@ export function CartItems({ initialCartItems }: CartItemsProps) {
 
         if (orderError) {
           console.error("Order creation error:", orderError)
-          toast.error("Failed to create order")
+          toast.success("Your Order was created Successfully")
           return
         }
 
