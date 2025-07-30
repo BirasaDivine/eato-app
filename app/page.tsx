@@ -501,9 +501,6 @@ export default function HomePage() {
                 <Link href="/products" className="block text-gray-400 hover:text-white">
                   Products
                 </Link>
-                <Link href="/about" className="block text-gray-400 hover:text-white">
-                  About
-                </Link>
                 <button onClick={handleBecomeSellerClick} className="block text-gray-400 hover:text-white text-left">
                   Become a Seller
                 </button>
