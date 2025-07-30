@@ -30,5 +30,5 @@ Follow these instructions to run the Eato Platform on your local machine:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/BirasaDivine/Eato_app.git
-cd Eato_app
+git clone https://github.com/BirasaDivine/eato-app
+cd eato_app
