@@ -1,30 +1,34 @@
-# Supabase Application
+# 🍽️ Eato Platform
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Eato Platform is a modern **web-based application** that connects food business operators (FBOs) with consumers, enabling the purchase of near-expiry or surplus food at discounted prices. The platform supports sustainability by reducing food waste while providing affordable meals to users.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/birasadivines-projects/v0-supabase-application)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/pLSoXjdV2Bf)
+> 🧪 This project is both a learning journey in full-stack development and a real-world solution hosted on [Vercel](https://eato-platform.vercel.app/).
 
-## Overview
+---
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## 🚀 Live Demo
 
-## Deployment
+👉 [View Deployed App on Vercel](https://eato-platform.vercel.app/)
 
-Your project is live at:
+---
 
-**[https://vercel.com/birasadivines-projects/v0-supabase-application](https://vercel.com/birasadivines-projects/v0-supabase-application)**
+## 🛠️ Tech Stack
 
-## Build your app
+- **Frontend Framework**: React
+- **Backend Platform**: Supabase
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Deployment**: Vercel
 
-Continue building your app on:
+---
 
-**[https://v0.dev/chat/projects/pLSoXjdV2Bf](https://v0.dev/chat/projects/pLSoXjdV2Bf)**
+## 📦 Getting Started Locally
 
-## How It Works
+Follow these instructions to run the Eato Platform on your local machine:
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/BirasaDivine/Eato_app.git
+cd Eato_app
