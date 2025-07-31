@@ -126,7 +126,7 @@ export default function FBOPage() {
 
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=500&width=600"
+                src="/vendor.jpg"
                 alt="Farmer selling fresh produce"
                 width={600}
                 height={500}
@@ -197,7 +197,7 @@ export default function FBOPage() {
 
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=500&width=600"
+                src="/Vegetables.jpg"
                 alt="Business dashboard"
                 width={600}
                 height={500}

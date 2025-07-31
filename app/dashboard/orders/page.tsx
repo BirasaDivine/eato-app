@@ -29,8 +29,10 @@ async function getOrders(sellerId: string) {
         products(name, image_urls)
       )
     `)
-    .eq("seller_id", sellerId)
+    // .eq("seller_id", sellerId)
     .order("created_at", { ascending: false })
+
+    console.log("orders", {orders})
 
   return orders || []
 }
